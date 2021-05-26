@@ -1,59 +1,26 @@
-1.  !pip install keras-tuner
-
-
-2. import tensorflow as tf
-   from tensorflow import keras
-   import numpy as np
-
-3. fashion_mnist=keras.datasets.fashion_mnist
-
-4. (train_images,train_labels),(test_images,test_labels)=fashion_mnist.load_data()
-
-
-5. train_images=train_images/255.0
-   test_images=test_images/255.0
-
-6. train_images[0].shape
- 
-7. train_images = train_images.reshape(len(train_images),28,28,1)
-   test_images = test_images.reshape(len(test_images),28,28,1)
-
-8. def build_model(hp):
-     model = keras.Sequential([ 
-       keras.layers.Conv2D(
-          filters=hp.Int('conv_1_filter', min_value=32, max_value=128, step=16),
-          kernel_size=hp.Choice('conv_1_kernel', values = [3,5]),
-          activation='relu',
-          input_shape=(28,28,1)
-       ),
-       keras.layers.Conv2D(
-          filters=hp.Int('conv_2_filter', min_value=32, max_value=64, step=16),
-          kernel_size=hp.Choice('conv_2_kernel', values = [3,5]),
-          activation='relu'
-       ),
-       keras.layers.Flatten(),
-       keras.layers.Dense(
-          units=hp.Int('dense_1_units', min_value=32, max_value=128, step=16),
-          activation='relu'
-       ),
-       keras.layers.Dense(10, activation='softmax')#output layer
-     ])
-     
-     model.compile(optimizer=keras.optimizers.Adam(hp.Choice('learning_rate', values=[1e-2, 1e-3])),
-               loss='sparse_categorical_crossentropy',
-               metrics=['accuracy'])
-     
-     return model
-
-9.  from kerastuner import RandomSearch
-    from kerastuner.engine.hyperparameters import HyperParameters
-
-10. tuner_search=RandomSearch(build_model,
-                          objective='val_accuracy',
-                          max_trials=5,directory='output',project_name="Mnist Fashion")
-
-11.  tuner_search.search(train_images,train_labels,epochs=3,validation_split=0.1)
-
-12.  model=tuner_search.get_best_models(num_models=1)[0]
-
-13.  model.summary()
+# SHAPEAI PYTHON AND COMPUTER VISION BOOTCAMP
+Hi I made this project during the 7 Days Free Bootcamp, conducted by <b> SHAPEAI
+</b>.
+The instructor during the session was Mr. Shaurya Sinha (Data Analyst Intern at Jio). I got to
+learn a lot during these 7 days and it was an amazing experience learning with SHAPEAI.
+<br><br>Here's the link for you to watch the sessions as well<br>
+<a href="https://www.youtube.com/playlist?list=PL7zl8TDRnbulHqBNcsk_zeuy1RTKePPcg"> <img src="https://github.com/ShapeAI/PYTHON-AND-DATA-ANALYTICS/blob/main/YOUTUBE%20THUMBNAIL-2.png"> </a>
+<br>I got to have hands on experience on:
+<li>Python
+<li>Neural Networks
+<li>CNNs
+<br>during these 7 days, and everything was explained from the very basics so that
+anyone with zero experience on programming can learn.
+I enjoyed these 7 days, you can as well. To register for next free 7 days bootcamp, visit:
+www.shapeai.tech
+or follow SHAPEAI on:
+<li><a href=
+"https://in.linkedin.com/company/shapeai">LinkedIn</a>
+<li><a href=
+"https://www.instagram.com/shape.ai/?hl=en">Instagram</a>
+<li><a
+href=
+"https://www.youtube.com/channel/UCTUvDLTW9meuDXWcbmISPdA">YouTu
+be</a>
+<li><a href=
+"https://github.com/shapeai">GitHub</a>
